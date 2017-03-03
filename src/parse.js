@@ -1,15 +1,12 @@
 
-
-
-
 let fileSystem = require('fs');
-let data = fileSystem.readFileSync('./traffic-data/simple_data/moving_jan_2016.csv');
 
-function parseMachine (fileCsv){
+module.exports = function parseMachine(fileCsv){
+  let parsedData = fileSystem.readFileSync(fileCsv);
   let mainArray= [];//array to hold my arrays
     // console.log("DATA");testing
     // console.log(data);//outputs buffer testing
-  let stringy = data.toString();//converts to a string
+  let stringy = parsedData.toString();//converts to a string
   let rows = stringy.split('\n');//splits it at the break
     // console.log(rows.length);//this outputs the length of rows
 
@@ -25,7 +22,7 @@ for (let index = 0; index < rows.length; index++) {
 // console.log(mainArray[0]);
   return mainArray;
 }
-console.log(parseMachine());
+ // parseMachine();
 
 
 
