@@ -68,20 +68,36 @@ function movingViolations(/*year, monthName*/){
   let fineTemp = 0;
   let fineLength = 0;
   movingDC.forEach(function fineAverage(fines) {
-      console.log(fines[10]);
+      // console.log(fines[10]);
       fineTemp = fines[10];
       fineTotal = fineTotal + Number(fineTemp);
       // console.log(fineTotal);
       // console.log(fines.length);//why is it giving me 20
       fineLength++;
-      console.log(fineLength);
+      // console.log(fineLength);
   });
 
   let fineAverage = ((fineTotal / fineLength)).toFixed(2);
-  console.log(fineTotal);
-  console.log(fineAverage);
+  console.log('Fine total: ',fineTotal);
+  console.log('Fine average: ',fineAverage);
 
 
+
+/****************************TOTAL INCOME FOR PHOTO CITATIONS************************************************/
+
+    let paidTotal = 0;
+    let paidTemp = 0;
+    let penaltyOneTemp = 0;
+    let penaltyTwoTemp = 0;
+
+    movingDC.forEach(function ticketIncome(paid) {
+        // console.log('indx 11 ', paid[11],'indx 12 ', paid[12],' indx 13 ', paid[13]);
+        paidTemp = Number(paid[11]) + Number(paid[12]) + Number(paid[13]);
+        paidTotal = paidTotal + paidTemp;
+      });
+
+    // let fineAverage = ((fineTotal / fineLength)).toFixed(2);
+    console.log('Total paid: ',paidTotal);
 
 /****************************TESTING************************************************/
 // console.log(typeof(fineTotal));
