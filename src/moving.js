@@ -54,54 +54,62 @@ function movingViolations(/*year, monthName*/){
       mostTixObj.ViolationType = tempNameCont;//stores tempNameCont inside mostTixObj
       mostTixObj.count = tempNumCont;//stores tempNumCont inside mostTixObj
   }
-// console.log(mostTixObj);
+
 
 
 /*****************************AVERAGE FINE AMOUNTe***********************************************/
-// What is the average fine amount? index 10
-//I simply need to add all the values of index 10 together then divide by the length
-// of the object, or rather array. Having the first and last indexes will be problematic
-// i need to isolate index 10 and put all of that into an array or a VARIABLES
-
+// fineamt index 10
 
   let fineTotal = 0;
   let fineTemp = 0;
   let fineLength = 0;
+
   movingDC.forEach(function fineAverage(fines) {
       // console.log(fines[10]);
       fineTemp = fines[10];
       fineTotal = fineTotal + Number(fineTemp);
-      // console.log(fineTotal);
-      // console.log(fines.length);//why is it giving me 20
       fineLength++;
-      // console.log(fineLength);
   });
 
   let fineAverage = ((fineTotal / fineLength)).toFixed(2);
   console.log('Fine total: ',fineTotal);
-  console.log('Fine average: ',fineAverage);
+  console.log('Fine average: '  + '$'+fineAverage);
 
 
 
 /****************************TOTAL INCOME FOR PHOTO CITATIONS************************************************/
+//photo index is 10
+  let photoTotal = 0;
+  let photoTemp = 0;
+  let ticketType = 0;
+  let otherTotal = 0;
+  let otherTemp = 0;
 
-    let paidTotal = 0;
-    let paidTemp = 0;
-    let penaltyOneTemp = 0;
-    let penaltyTwoTemp = 0;
+  movingDC.forEach(function ticketIncome(index) {
+      ticketType = index[9];//can change this to index
+      if (ticketType === 'Photo'){
+        photoTemp = Number(index[11]) + Number(index[12]) + Number(index[13]);
+        photoTotal = photoTotal + photoTemp;
+        }else{
+            otherTemp = Number(index[11]) + Number(index[12]) + Number(index[13]);
+            otherTotal = otherTotal + otherTemp;
+          }
+        });
 
-    movingDC.forEach(function ticketIncome(paid) {
-        // console.log('indx 11 ', paid[11],'indx 12 ', paid[12],' indx 13 ', paid[13]);
-        paidTemp = Number(paid[11]) + Number(paid[12]) + Number(paid[13]);
-        paidTotal = paidTotal + paidTemp;
-      });
+  // let fineAverage = ((fineTotal / fineLength)).toFixed(2);
+  console.log('Total photo: ',photoTotal);
+  console.log('Other paid: ',otherTotal);
+  let totalIncome = photoTotal + otherTotal;
+  console.log('Total paid: ',totalIncome);
 
-    // let fineAverage = ((fineTotal / fineLength)).toFixed(2);
-    console.log('Total paid: ',paidTotal);
+
+
+
+
 
 /****************************TESTING************************************************/
+// console.log(mostTixObj);
 // console.log(typeof(fineTotal));
-
 // console.log(movingDC.length);
 //console.log (ticketKeys);
 // console.log(ticketTypes);
@@ -115,12 +123,3 @@ function movingViolations(/*year, monthName*/){
 }
 
 movingViolations();
-
-
-
-
-
-
-//       What is the average fine amount?
-//       What was the total income from photo citations (tickettype = "Photo")?
-//       What was the total income from all moving violations?
