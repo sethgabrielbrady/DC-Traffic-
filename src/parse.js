@@ -20,13 +20,16 @@ for (let index = 0; index < rows.length; index++) {
 
 
 // console.log(mainArray[0]);
+  mainArray.splice(0, 1); //removes index 0
+  mainArray.splice((mainArray.length), 1); //removes the last index
   return mainArray;
 }
  // parseMachine();
 
 
 
-
+ // Array.prototype.splice()
+ // Adds and/or removes elements from an array.
 
 
 

@@ -10,7 +10,7 @@ let output = require('./parse.js');
 
 //How many different types of parking tickets were issued? DONEish
 function parkingViolations(/*year, monthName*/){
-    let parkingDC = output('./traffic-data/simple_data/parking_feb_2016.csv');
+let parkingDC = output('./traffic-data/simple_data/parking_feb_2016.csv');
 
     let ticketTypes = {};
     parkingDC.forEach(function parking(ticket) {
@@ -28,9 +28,6 @@ let ticketKeys = Object.keys(ticketTypes);//outputs the number of properties in 
 
 /****************************************************************************/
 console.log(ticketTypes);
-
-
-
 
 let tempNumCont=0;
 let tempNameCont = '';
