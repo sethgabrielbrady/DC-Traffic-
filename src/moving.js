@@ -1,64 +1,51 @@
 
 
-
-
-// MOVING.js
-// should export a single function which accepts a year and month name
-//    (not a filename) as its arguments. The function must return an object with
-//    the answers to the data analysis questions below.
-
-
 let output = require('./parse.js');
 
 
-//I need get get the function to accept a file name
 function movingViolations(/*year, monthName*/){
 
-/*****************************VARIABLES******************************************************/
   let movingDC = output('./traffic-data/simple_data/moving_jan_2016.csv');
-
-
-
+  let resultsObj= {
+        ViolationType: '',
+        count: 0
+        };
 
 /*****************************STORES VIOLATION TYPES INSIDE AN OBJECT***********************************************/
 
-  let ticketTypes = {};
+  let violationTypes = {};
 
   movingDC.forEach(function moving(ticket) {
-    // console.log([ticket[17]]);
-  if (ticketTypes[ticket[17]] >= 1){
-          ticketTypes[ticket[17]] = ticketTypes[ticket[17]] + 1;
-        }else {
-            ticketTypes[ticket[17]] = 1;
-            }
+      if (violationTypes[ticket[18]] >= 1){
+          violationTypes[ticket[18]] = violationTypes[ticket[18]] + 1;
+          }else {
+              violationTypes[ticket[18]] = 1;
+              }
+      });
 
-          });
-
-  let ticketKeys = Object.keys(ticketTypes);//outputs the number of properties in an objects
+  let ticketKeys = Object.keys(violationTypes);//outputs the number of properties in an objects
   /*****************************Counts Most VIolations of a Type***********************************************/
+
   let tempNumCont=0;
   let tempNameCont = '';
-  let mostTixObj= {
-        ViolationType: '',
-        count: 0
-      };
+
+  let mostViolationTypes = 0;
 
   for (i=0; i<(ticketKeys.length); i++){
     // console.log(ticketKeys[i] + ':' + ticketTypes[ticketKeys[i]]);//
-      if (ticketTypes[ticketKeys[i]] >= tempNumCont){
+      if (violationTypes[ticketKeys[i]] >= tempNumCont){
         // console.log(tempNameCont + ':' +  tempNumCont);
-        tempNumCont = ticketTypes[ticketKeys[i]];//property
+        tempNumCont = violationTypes[ticketKeys[i]];//property
         tempNameCont = ticketKeys[i];//key
+          }
+
+      mostViolationTypes = tempNameCont;
+      // mostViolationTypes = tempCodeCont;
+      resultsObj.ViolationType = tempNameCont;//stores tempNameCont inside mostTixObj
+      resultsObj.count = tempNumCont;//stores tempNumCont inside mostTixObj
       }
 
-      mostTixObj.ViolationType = tempNameCont;//stores tempNameCont inside mostTixObj
-      mostTixObj.count = tempNumCont;//stores tempNumCont inside mostTixObj
-  }
-
-
-
 /*****************************AVERAGE FINE AMOUNTe***********************************************/
-// fineamt index 10
 
   let fineTotal = 0;
   let fineTemp = 0;
@@ -71,38 +58,28 @@ function movingViolations(/*year, monthName*/){
       fineLength++;
   });
 
-  let fineAverage = ((fineTotal / fineLength)).toFixed(2);
-  console.log('Fine total: ',fineTotal);
-  console.log('Fine average: '  + '$'+fineAverage);
+  let fineAverage = (fineTotal / fineLength);
 
+/****************************TOTAL INCOME CITATIONS*********************************************/
 
-
-/****************************TOTAL INCOME FOR PHOTO CITATIONS************************************************/
-//photo index is 10
   let photoTotal = 0;
   let photoTemp = 0;
   let ticketType = 0;
   let otherTotal = 0;
   let otherTemp = 0;
+  let totalIncome =0;
 
   movingDC.forEach(function ticketIncome(index) {
-      ticketType = index[9];//can change this to index
+      ticketType = index[9];
       if (ticketType === 'Photo'){
         photoTemp = Number(index[11]) + Number(index[12]) + Number(index[13]);
         photoTotal = photoTotal + photoTemp;
         }else{
             otherTemp = Number(index[11]) + Number(index[12]) + Number(index[13]);
             otherTotal = otherTotal + otherTemp;
-          }
+            }
+      totalIncome = photoTotal + otherTotal;
         });
-
-  // let fineAverage = ((fineTotal / fineLength)).toFixed(2);
-  console.log('Total photo: ',photoTotal);
-  console.log('Other paid: ',otherTotal);
-  let totalIncome = photoTotal + otherTotal;
-  console.log('Total paid: ',totalIncome);
-
-
 
 
 
@@ -116,8 +93,14 @@ function movingViolations(/*year, monthName*/){
 // console.log('this is the ticket key length', ticketKeys.length);
 
 
+console.log('Most violations: ', mostViolationTypes);
+console.log('Fine total: ' + '$'+fineTotal.toFixed(2));
+console.log('Fine average: ' + '$'+fineAverage.toFixed(2));
+console.log('Total photo: ' + '$'+photoTotal.toFixed(2));
+console.log('Other paid: ' + '$'+otherTotal.toFixed(2));
+console.log('Total paid: ' + '$'+totalIncome.toFixed(2));
 
-
+// console.log(resultsObj);
 
   // return answersObj
 }
