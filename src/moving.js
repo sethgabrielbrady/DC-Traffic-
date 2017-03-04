@@ -2,7 +2,6 @@
 
 let output = require('./parse.js');
 
-
 function movingViolations(/*year, monthName*/){
 
   let movingDC = output('./traffic-data/simple_data/moving_jan_2016.csv');
@@ -24,7 +23,8 @@ function movingViolations(/*year, monthName*/){
       });
 
   let ticketKeys = Object.keys(violationTypes);//outputs the number of properties in an objects
-  /*****************************Counts Most VIolations of a Type***********************************************/
+  
+/*****************************Counts Most VIolations of a Type***********************************************/
 
   let tempNumCont=0;
   let tempNameCont = '';
@@ -81,9 +81,6 @@ function movingViolations(/*year, monthName*/){
       totalIncome = photoTotal + otherTotal;
         });
 
-
-
-
 /****************************TESTING************************************************/
 // console.log(mostTixObj);
 // console.log(typeof(fineTotal));
@@ -92,7 +89,7 @@ function movingViolations(/*year, monthName*/){
 // console.log(ticketTypes);
 // console.log('this is the ticket key length', ticketKeys.length);
 
-
+//need to store all this in an object
 console.log('Most violations: ', mostViolationTypes);
 console.log('Fine total: ' + '$'+fineTotal.toFixed(2));
 console.log('Fine average: ' + '$'+fineAverage.toFixed(2));
@@ -101,8 +98,7 @@ console.log('Other paid: ' + '$'+otherTotal.toFixed(2));
 console.log('Total paid: ' + '$'+totalIncome.toFixed(2));
 
 // console.log(resultsObj);
-
-  // return answersObj
+// return resultsObj
 }
 
 movingViolations();
