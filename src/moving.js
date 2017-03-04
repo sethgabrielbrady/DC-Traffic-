@@ -3,16 +3,14 @@
 let output = require('./parse.js');
 
 function movingViolations(/*year, monthName*/){
-
+  let resultsObj ={};
   let movingDC = output('./traffic-data/simple_data/moving_jan_2016.csv');
-  let resultsObj= {
-        ViolationType: '',
-        count: 0
-        };
+  let violationTypes = {};
+
+
 
 /*****************************STORES VIOLATION TYPES INSIDE AN OBJECT***********************************************/
 
-  let violationTypes = {};
 
   movingDC.forEach(function moving(ticket) {
       if (violationTypes[ticket[18]] >= 1){
@@ -23,7 +21,7 @@ function movingViolations(/*year, monthName*/){
       });
 
   let ticketKeys = Object.keys(violationTypes);//outputs the number of properties in an objects
-  
+
 /*****************************Counts Most VIolations of a Type***********************************************/
 
   let tempNumCont=0;
@@ -41,8 +39,8 @@ function movingViolations(/*year, monthName*/){
 
       mostViolationTypes = tempNameCont;
       // mostViolationTypes = tempCodeCont;
-      resultsObj.ViolationType = tempNameCont;//stores tempNameCont inside mostTixObj
-      resultsObj.count = tempNumCont;//stores tempNumCont inside mostTixObj
+      // resultsObj.ViolationType = tempNameCont;//stores tempNameCont inside mostTixObj
+      // resultsObj.count = tempNumCont;//stores tempNumCont inside mostTixObj
       }
 
 /*****************************AVERAGE FINE AMOUNTe***********************************************/
@@ -61,7 +59,6 @@ function movingViolations(/*year, monthName*/){
   let fineAverage = (fineTotal / fineLength);
 
 /****************************TOTAL INCOME CITATIONS*********************************************/
-
   let photoTotal = 0;
   let photoTemp = 0;
   let ticketType = 0;
@@ -89,16 +86,23 @@ function movingViolations(/*year, monthName*/){
 // console.log(ticketTypes);
 // console.log('this is the ticket key length', ticketKeys.length);
 
-//need to store all this in an object
-console.log('Most violations: ', mostViolationTypes);
-console.log('Fine total: ' + '$'+fineTotal.toFixed(2));
-console.log('Fine average: ' + '$'+fineAverage.toFixed(2));
-console.log('Total photo: ' + '$'+photoTotal.toFixed(2));
-console.log('Other paid: ' + '$'+otherTotal.toFixed(2));
-console.log('Total paid: ' + '$'+totalIncome.toFixed(2));
+// console.log('Most violations: ', mostViolationTypes);
+// console.log('Fine total: ' + '$'+fineTotal.toFixed(2));
+// console.log('Fine average: ' + '$'+fineAverage.toFixed(2));
+// console.log('Total photo: ' + '$'+photoTotal.toFixed(2));
+// console.log('Other paid: ' + '$'+otherTotal.toFixed(2));
+// console.log('Total paid: ' + '$'+totalIncome.toFixed(2));
 
-// console.log(resultsObj);
-// return resultsObj
+// resultsObj.fineTotals = '$'+fineTotal.toFixed(2);
+// resultsObj.otherIncome = '$'+otherTotal.toFixed(2);
+
+resultsObj.mostCommonViolation = mostViolationTypes;
+resultsObj.fineAverage = '$'+fineAverage.toFixed(2);
+resultsObj.photoIncome = '$'+photoTotal.toFixed(2);
+resultsObj.totalIncome = '$'+totalIncome.toFixed(2);
+console.log(resultsObj);
+
+return resultsObj;
 }
 
 movingViolations();
