@@ -9,29 +9,55 @@
 
 
 let output = require('./parse.js');
-let movingDC = output();
-// console.log (movingDC);
 
 
 //I need get get the function to accept a file name
 function movingViolations(/*year, monthName*/){
-  // console.log(movingDC);
-  let movingArray =[];
-
-  //  How many different types of parking tickets were issued?
-  //  this is index9(violation code)
-  //  will need to sort throught the array (mainArray, at every inner array,
-  //  at index 9),
-
-  valueIndex = movingDC[0];
-  // console.log(valueIndex);//logs out index 0
-  console.log(valueIndex);
-
-
-  for(j=0; j<valueIndex.length; j++){
+let movingDC = output('./traffic-data/simple_data/moving_jan_2016.csv');
+// console.log(movingDC.length);
 
 
 
+let ticketTypes = {};
+movingDC.forEach(function moving(ticket) {
+  console.log( ticket[17] );
+   if (ticketTypes[ticket[17]] >=1){
+        ticketTypes[ticket[17]] = ticketTypes[ticket[17]] + 1;
+       }else {
+           ticketTypes[ticket[17]] = 1;
+          }
+        });
+// why is this NOT adding the correct amount to the array?
+// console.log(ticketTypes);//this logs the correct nubmer of ticket types
+let ticketKeys = Object.keys(ticketTypes);//outputs the number of properties in an objects
+
+
+console.log(ticketTypes);
+// console.log('this is the ticket key length', ticketKeys.length);
+
+
+
+//
+// let tempNumCont=0;
+// let tempNameCont = '';
+// let mostTixObj= {
+//       ViolationType: '',
+//       count: 0
+//     };
+//
+// for (i=0; i<(ticketKeys.length); i++){
+//   // console.log(ticketKeys[i] + ':' + ticketTypes[ticketKeys[i]]);//
+//     if (ticketTypes[ticketKeys[i]] >= tempNumCont){
+//       // console.log(tempNameCont + ':' +  tempNumCont);
+//       tempNumCont = ticketTypes[ticketKeys[i]];//property
+//       tempNameCont = ticketKeys[i];//key
+//     }
+//
+//     mostTixObj.ViolationType = tempNameCont;//stores tempNameCont inside mostTixObj
+//     mostTixObj.count = tempNumCont;//stores tempNumCont inside mostTixObj
+// }
+// console.log(mostTixObj);
+//
 
 
 
@@ -42,14 +68,6 @@ function movingViolations(/*year, monthName*/){
 
 movingViolations();
 
-// THE ANALYSIS REQUIRED
-//
-//       For any given year and month of parking data, provide the following analysis:
-//
-//       How many different types of parking tickets were issued?
-//       What was the most common violation type for a parking ticket?
-//       What state license plate gets the most tickets?
-//       For any given year and month of moving violation data, provide the following:
 //
 //       What was the most common violation type for a moving violation?
 //       What state license plate gets the most tickets?

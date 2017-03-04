@@ -6,7 +6,6 @@
 
 
 let output = require('./parse.js');
-//console.log (movingDC);
 
 
 //How many different types of parking tickets were issued? DONEish
@@ -54,7 +53,7 @@ for (i=0; i<(ticketKeys.length); i++){
 console.log(mostTixObj);
 /*****************************************************************************/
 
-
+//I might need to change to violation to somehting more readable.
 
 
   // return answersObj
