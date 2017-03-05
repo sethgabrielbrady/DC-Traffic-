@@ -3,11 +3,37 @@
 let output = require('./parse.js');
 
 
-function parkingViolations(/*year, monthName*/){
+module.exports = function parkingViolations(month = 'jan', year = '2016'){
 
   let resultsObj = {};
 
-  let parkingDC = output('./traffic-data/simple_data/parking_feb_2016.csv');
+///****************************************************************************/
+
+  if (typeof(month) !== 'string'){
+      console.log('Please enter a valid month');
+    }
+
+  if (year.length !== 4){
+    console.log('Please enter a valid four-digit year');
+   }
+
+  if ((month.length > 3) && (month !== 'april')){
+    month = month.slice(0,3);
+    }
+
+  month = month.toLowerCase();
+  year = year.toString();
+
+  /****************************************************************************/
+
+  // let parkingDC = output('./traffic-data/simple_data/parking_feb_2016.csv');
+  let filePath= './traffic-data/data/parking_'+ month + '_' + year +'.csv';
+  let parkingDC = output(filePath);
+
+  /****************************************************************************/
+
+//there is a bug here that is giving diff results depending on the
+// index you are searching through despite that they shoudl be the same.
   let violationObj = {};
   let otherNAme = '';
     parkingDC.forEach(function parking(ticket) {
@@ -43,7 +69,7 @@ function parkingViolations(/*year, monthName*/){
   let mostCommonParkingViolation = tempNameCont;
 /*****************************************************************************/
 
-//console.log(violationObj);
+// console.log(violationObj);
 // console.log(mostTixObj);
 let violationTypes = ticketKeys.length;
 
@@ -58,4 +84,4 @@ console.log(resultsObj);
   return resultsObj;
 }
 
-parkingViolations();
+// parkingViolations();

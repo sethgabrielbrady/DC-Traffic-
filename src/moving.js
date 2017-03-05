@@ -2,15 +2,38 @@
 
 let output = require('./parse.js');
 
-function movingViolations(/*year, monthName*/){
+module.exports = function movingViolations(month = 'jan', year = '2016'){
   let resultsObj ={};
-  let movingDC = output('./traffic-data/simple_data/moving_jan_2016.csv');
-  let violationTypes = {};
+//let movingDC = output('./traffic-data/simple_data/moving_jan_2016.csv');
+/****************************************************************************/
+
+  if (typeof(month) !== 'string'){
+    console.log('Please enter a valid month');
+    return;
+  }
+
+  if (year.length !== 4){
+    console.log('Please enter a valid four-digit year');
+   }
+
+  if ((month.length > 3) && (month !== 'april')){
+    month = month.slice(0,3);
+  };
+
+  month = month.toLowerCase();
+  year = year.toString();
 
 
+//if the year does not contain four digit or is invalid, stop the program and
+//request a number in the 4 digit format and possible in the a year range.
+
+/****************************************************************************/
+
+  let filePath = './traffic-data/data/moving_'+ month + '_' + year +'.csv';
+  let movingDC = output(filePath);
 
 /*****************************STORES VIOLATION TYPES INSIDE AN OBJECT***********************************************/
-
+  let violationTypes = {};
 
   movingDC.forEach(function moving(ticket) {
       if (violationTypes[ticket[18]] >= 1){
@@ -69,7 +92,7 @@ function movingViolations(/*year, monthName*/){
   movingDC.forEach(function ticketIncome(index) {
       ticketType = index[9];
       if (ticketType === 'Photo'){
-        photoTemp = Number(index[11]) + Number(index[12]) + Number(index[13]);
+        photoTemp = Number(index[11]) + Number(index[12]) + Number(index[13]);//converts to a number
         photoTotal = photoTotal + photoTemp;
         }else{
             otherTemp = Number(index[11]) + Number(index[12]) + Number(index[13]);
@@ -105,4 +128,4 @@ console.log(resultsObj);
 return resultsObj;
 }
 
-movingViolations();
+// movingViolations();
