@@ -3,8 +3,8 @@
 let output = require('./parse.js');
 
 module.exports = function movingViolations(month = 'jan', year = '2016'){
+
   let resultsObj ={};
-//let movingDC = output('./traffic-data/simple_data/moving_jan_2016.csv');
 /****************************************************************************/
 
   if (typeof(month) !== 'string'){
@@ -24,10 +24,8 @@ module.exports = function movingViolations(month = 'jan', year = '2016'){
   year = year.toString();
 
 
-//if the year does not contain four digit or is invalid, stop the program and
-//request a number in the 4 digit format and possible in the a year range.
-
 /****************************************************************************/
+//let movingDC = output('./traffic-data/simple_data/moving_jan_2016.csv');//for simple data
 
   let filePath = './traffic-data/data/moving_'+ month + '_' + year +'.csv';
   let movingDC = output(filePath);
@@ -123,7 +121,7 @@ resultsObj.mostCommonViolation = mostViolationTypes;
 resultsObj.fineAverage = '$'+fineAverage.toFixed(2);
 resultsObj.photoIncome = '$'+photoTotal.toFixed(2);
 resultsObj.totalIncome = '$'+totalIncome.toFixed(2);
-console.log(resultsObj);
+// console.log(resultsObj);
 
 return resultsObj;
 }
