@@ -100,9 +100,9 @@ let violationTypes = ticketKeys.length;
 // console.log(violationTypes);
 // console.log(mostCommonParkingViolation);
 
-resultsObj.violationTypes = violationTypes;
-resultsObj.mostCommonViolation = mostCommonParkingViolation;
-resultsObj.stateTicketedTheMost = mostPlates;
+resultsObj.violationTypesIssued = violationTypes;
+resultsObj.mostCommonViolationIssued = mostCommonParkingViolation;
+resultsObj.stateIssuedTheMostViolations = mostPlates;
 
   // console.log(resultsObj);
   return resultsObj;
