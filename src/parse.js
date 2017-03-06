@@ -5,6 +5,7 @@ let fileSystem = require('fs');
 module.exports = function parseMachine(fileCsv){
 
   let parsedData = fileSystem.readFileSync(fileCsv);
+  
   let mainArray= [];//array to hold my arrays
   let stringy = parsedData.toString();//converts to a string
   stringy = stringy.trim(); // removes white space from both sides of the new string

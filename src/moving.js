@@ -18,7 +18,7 @@ module.exports = function movingViolations(month = 'jan', year = '2016'){
 
   if ((month.length > 3) && (month !== 'april')){
     month = month.slice(0,3);
-  };
+  }
 
   month = month.toLowerCase();
   year = year.toString();
@@ -117,7 +117,7 @@ module.exports = function movingViolations(month = 'jan', year = '2016'){
 // resultsObj.fineTotals = '$'+fineTotal.toFixed(2);
 // resultsObj.otherIncome = '$'+otherTotal.toFixed(2);
 
-resultsObj.mostCommonViolation = mostViolationTypes;
+resultsObj.mostCommonMovingViolation = mostViolationTypes;
 resultsObj.fineAverage = '$'+fineAverage.toFixed(2);
 resultsObj.photoIncome = '$'+photoTotal.toFixed(2);
 resultsObj.totalIncome = '$'+totalIncome.toFixed(2);

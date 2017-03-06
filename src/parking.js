@@ -31,10 +31,8 @@ module.exports = function parkingViolations(month = 'jan', year = '2016'){
 
   /****************************************************************************/
 
-//there is a bug here that is giving diff results depending on the
 // index you are searching through despite that they shoudl be the same.
   let violationObj = {};
-  let otherName = '';
     parkingDC.forEach(function parking(ticket) {
 
       if ( violationObj[ticket[10]] >= 1){
@@ -45,6 +43,34 @@ module.exports = function parkingViolations(month = 'jan', year = '2016'){
             });
 
   let ticketKeys = Object.keys(violationObj);//outputs the number of properties in an objects
+
+/**************************license plate count **************************************************/
+  // What state license plate gets the most tickets?
+
+
+  let stateObj = {};
+    parkingDC.forEach(function parking(plates) {
+
+      if ( stateObj[plates[12]] >= 1){
+             stateObj[plates[12]] =  stateObj[plates[12]] + 1;
+          }else {
+               stateObj[plates[12]] = 1;
+              }
+            });
+
+  let plateKeys = Object.keys(stateObj);//outputs the number of properties in an objects
+
+  let tempNumCont2=0;
+  let tempNameCont2 = '';
+
+  for (i=0; i<=(plateKeys.length); i++){
+      if (stateObj[plateKeys[i]] >= tempNumCont2){
+        tempNumCont2 =  stateObj[plateKeys[i]];//property
+        tempNameCont2 = plateKeys[i] ;//key
+          }
+    }
+
+  let mostPlates = tempNameCont2;
 
 /****************************************************************************/
 
@@ -74,12 +100,12 @@ let violationTypes = ticketKeys.length;
 // console.log(violationTypes);
 // console.log(mostCommonParkingViolation);
 
-resultsObj.ViolationTypes = violationTypes;
-resultsObj.MostCommonViolation = mostCommonParkingViolation;
-
+resultsObj.violationTypes = violationTypes;
+resultsObj.mostCommonViolation = mostCommonParkingViolation;
+resultsObj.stateTicketedTheMost = mostPlates;
 
   // console.log(resultsObj);
   return resultsObj;
-}
+};
 
 // parkingViolations();
